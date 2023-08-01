@@ -1,21 +1,21 @@
 import React from "react";
 
 const welcomeContainer = {
-    display: "flex",
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    position: "absolute",
-    top: "30%",
-    left: "50%",
-    transform: "translate(-50%, -50%)"
+  display: "flex",
+  width: "100%",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: "62px"
 };
 
+
 const welcome = {
-  fontFamily: 'Lilita One ,cursive',
+  fontFamily: "Lilita One ,cursive",
   fontSize: "44px",
   color: "white",
   marginBottom: "20px",
+  paddingLeft:"20px"
 };
 
 const logoutBtn = {
@@ -26,10 +26,17 @@ const logoutBtn = {
   color: "#FFFFFF",
   border: "none",
   borderRadius: "4px",
-  cursor: "pointer",
+  cursor: "pointer"
 };
 
-function Welcome({ userName }) {
+const userImage = {
+  width: "150px",
+  height: "150px",
+  borderRadius: "50%",
+  objectFit: "cover"
+};
+
+function Welcome({ userName, userImageURL }) {
   const logout = () => {
     localStorage.clear();
     window.location.reload();
@@ -37,15 +44,18 @@ function Welcome({ userName }) {
 
   return (
     <>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
-    </style>
-    <div style={welcomeContainer}>
-      <h1 style={welcome}>Welcome to Code Side, {userName}!</h1>
-      <button style={logoutBtn} onClick={logout}>
-        Logout
-      </button>
-    </div>
+      <style>
+        @import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
+      </style>
+      <div style={welcomeContainer}>
+
+        {userImageURL && ( <img src={userImageURL} alt="User Profile" style={userImage} />)}
+        
+        <h1 style={welcome}>Welcome to Code Side, {userName}!</h1>
+        <button style={logoutBtn} onClick={logout}>
+          Logout
+        </button>
+      </div>
     </>
   );
 }
