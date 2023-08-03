@@ -1,41 +1,5 @@
 import React from "react";
 
-const welcomeContainer = {
-  display: "flex",
-  width: "100%",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  marginBottom: "62px"
-};
-
-
-const welcome = {
-  fontFamily: "Lilita One ,cursive",
-  fontSize: "44px",
-  color: "white",
-  marginBottom: "20px",
-  paddingLeft:"20px"
-};
-
-const logoutBtn = {
-  padding: "10px 20px",
-  marginTop: "50px",
-  fontSize: "16px",
-  backgroundColor: "#f44336",
-  color: "#FFFFFF",
-  border: "none",
-  borderRadius: "4px",
-  cursor: "pointer"
-};
-
-const userImage = {
-  width: "150px",
-  height: "150px",
-  borderRadius: "50%",
-  objectFit: "cover"
-};
-
 function Welcome({ userName, userImageURL }) {
   const logout = () => {
     localStorage.clear();
@@ -43,20 +7,17 @@ function Welcome({ userName, userImageURL }) {
   };
 
   return (
-    <>
-      <style>
-        @import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
-      </style>
-      <div style={welcomeContainer}>
+    <div className="flex flex-col items-center justify-start h-screen">
 
-        {userImageURL && ( <img src={userImageURL} alt="User Profile" style={userImage} />)}
-        
-        <h1 style={welcome}>Welcome to Code Side, {userName}!</h1>
-        <button style={logoutBtn} onClick={logout}>
-          Logout
-        </button>
+      <div className="flex flex-col items-center justify-center pt-20">
+
+        {userImageURL && ( <img src={userImageURL} alt="UserImage" className="w-36 h-36 mb-10 rounded-full object-cover"/>)}
+          
+        <h1 className="text-white mb-10 text-2xl sm:text-4xl md:text-5xl" style={{ fontFamily: 'Lilita One, cursive'}}>Welcome to the Code Side, {userName}!</h1>
+          
+        <button className="px-6 py-2 bg-red-500 text-white border-none rounded-md" onClick={logout}>Logout</button>
       </div>
-    </>
+  </div>
   );
 }
 

@@ -3,22 +3,6 @@ import { auth, provider } from "../../services/firebase.config";
 import { signInWithPopup, getAdditionalUserInfo } from "firebase/auth";
 import Welcome from "./Welcome";
 
-const signInBtn = {
-  padding: "20px 24px",
-  backgroundColor: "#4285F4",
-  color: "#FFFFFF",
-  border: "none",
-  borderRadius: "40px",
-  cursor: "pointer",
-};
-
-const container = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  height: "100vh",
-};
-
 function SignIn() {
   const [userData, setUserData] = useState(null);
   const [userFavicon, setUserFavicon] = useState(null);
@@ -72,15 +56,12 @@ function SignIn() {
   }, [userFavicon]);
 
   return (
-    <div style={container}>
-      {userData ? (
-        <Welcome userName={userData.userName} userImageURL={userData.userImageURL}
-        />
-      ) : (
-        <button style={signInBtn} onClick={Authenticate}>
-          <i className="fa-brands fa-3x fa-google"></i>
-        </button>
-      )}
+    <div className="flex items-center justify-center h-screen bg-[#04162ef8]">
+      {userData ? ( <Welcome userName={userData.userName} userImageURL={userData.userImageURL} /> ) 
+      
+      : ( <button onClick={Authenticate}>
+          <img src="./gg.png" alt="Big G" className="w-20 h-20 rounded-full select-none bg-white"/>
+        </button> )}
     </div>
   );
 }
