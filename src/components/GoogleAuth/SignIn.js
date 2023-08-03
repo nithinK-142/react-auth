@@ -6,6 +6,7 @@ import Welcome from "./Welcome";
 function SignIn() {
   const [userData, setUserData] = useState(null);
   const [userFavicon, setUserFavicon] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const changeFavicon = (faviconUrl) => {
     const favicon = document.querySelector("link[rel='icon']") || document.createElement("link");
@@ -16,6 +17,7 @@ function SignIn() {
 
   const Authenticate = async () => {
     try {
+      setIsLoading(true);
       const data = await signInWithPopup(auth, provider);
       const additionalUserInfo = getAdditionalUserInfo(data);
 
@@ -59,8 +61,8 @@ function SignIn() {
     <div className="flex items-center justify-center h-screen bg-[#04162ef8]">
       {userData ? ( <Welcome userName={userData.userName} userImageURL={userData.userImageURL} /> ) 
       
-      : ( <button onClick={Authenticate}>
-          <img src="./gg.png" alt="Big G" className="w-20 h-20 rounded-full select-none bg-white"/>
+      : ( <button onClick={Authenticate} disabled={isLoading}>
+          <img src="./gg.png" alt="Big G" className="w-20 h-20 bg-white rounded-full select-none"/>
         </button> )}
     </div>
   );
