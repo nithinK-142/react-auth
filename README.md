@@ -1,3 +1,3 @@
-# React Auth App
+# React Auth 
 
-Google Authentication using Firebase.
+Google and GitHub Authentication using Firebase.
