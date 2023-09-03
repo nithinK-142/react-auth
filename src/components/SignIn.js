@@ -19,7 +19,7 @@ function SignIn() {
     document.head.appendChild(favicon);
   };
 
-  const authenticate = async (provider, authName) => {
+  const authenticateUser = async (provider, authName) => {
     try {
       setIsLoading(true);
       const data = await signInWithPopup(auth, provider);
@@ -30,14 +30,13 @@ function SignIn() {
       if (authName === "Google") {
         userName = data.user.displayName;
         userImageURL = getAdditionalUserInfo(data).profile.picture || null;
-        document.title = `${userName} - Google Auth`;
-        setAuthProvider("Google");
       } else if (authName === "GitHub") {
         userName = data._tokenResponse.screenName;
         userImageURL = data._tokenResponse.photoUrl || null;
-        document.title = `${userName} - GitHub Auth`;
-        setAuthProvider("GitHub");
       }
+      
+      document.title = `${userName} - ${authName} Auth`;
+      setAuthProvider(authName);
 
       setUserData({
         userName: userName,
@@ -85,7 +84,7 @@ function SignIn() {
           <span className="w-16 h-16 bg-white rounded-full select-none">
             <button
               className="bg-opacity-0 cursor-pointer"
-              onClick={() => authenticate(googleProvider, "Google")}
+              onClick={() => authenticateUser(googleProvider, "Google")}
               disabled={isLoading}
             >
               <img src="./gg.png" alt="Big G" className="w-16 h-16" />
@@ -95,7 +94,7 @@ function SignIn() {
           <span className="w-16 h-16 bg-white rounded-full select-none flex align-center justify-center">
             <button
               className="bg-opacity-0 cursor-pointer"
-              onClick={() => authenticate(githubProvider, "GitHub")}
+              onClick={() => authenticateUser(githubProvider, "GitHub")}
               disabled={isLoading}
             >
               <img src="./github.svg" alt="GitHub Icon" className="w-12 h-12" />
